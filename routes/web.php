@@ -10,3 +10,5 @@ $router->get('/login', 'AuthController@showLoginForm');
 $router->post('/login', 'AuthController@login');
 $router->get('/logout', 'AuthController@logout');
 $router->get('/dashboard', 'AuthController@dashboard');
+
+$router->get('/test', 'AuthController@test');

@@ -5,6 +5,7 @@ namespace Core;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use FastRoute;
+use Illuminate\Http\Request;
 
 class Router
 {
@@ -91,7 +92,26 @@ class Router
                     list($controller, $method) = explode('@', $handler);
                     $controller = "App\\Controllers\\{$controller}";
                     $controllerInstance = $this->container->make($controller);
-                    $response = call_user_func_array([$controllerInstance, $method], array_values($vars));
+                    
+                    $request = Request::capture();
+                    
+                    $reflection = new \ReflectionMethod($controller, $method);
+                    $parameters = [];
+                    
+                    foreach ($reflection->getParameters() as $param) {
+                        if ($param->getType() && $param->getType()->getName() === Request::class) {
+                            $parameters[] = $request;
+                        } else {
+                            // For route parameters
+                            if (isset($vars[$param->getName()])) {
+                                $parameters[] = $vars[$param->getName()];
+                            } elseif ($param->isDefaultValueAvailable()) {
+                                $parameters[] = $param->getDefaultValue();
+                            }
+                        }
+                    }
+                    
+                    $response = $reflection->invokeArgs($controllerInstance, $parameters);
                 } elseif (is_callable($handler)) {
                     $response = call_user_func_array($handler, array_values($vars));
                 }

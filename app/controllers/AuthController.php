@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Core\Controller;
 use App\Models\User;
 use Core\Database;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -19,11 +20,11 @@ class AuthController extends Controller
     /**
      * Handle user registration
      */
-    public function register()
+    public function register(Request $request)
     {
-        $name = $_POST['name'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
+        $name = $request->input('name', '');
+        $email = $request->input('email', '');
+        $password = $request->input('password', '');
 
         // Validate input
         if (empty($name) || empty($email) || empty($password)) {
@@ -72,10 +73,10 @@ class AuthController extends Controller
     /**
      * Handle user login
      */
-    public function login()
+    public function login(Request $request)
     {
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
+        $email = $request->input('email', '');
+        $password = $request->input('password', '');
 
         // Validate input
         if (empty($email) || empty($password)) {
@@ -129,4 +130,5 @@ class AuthController extends Controller
             'user' => $user
         ]);
     }
+
 }
