@@ -1,12 +1,12 @@
 {
     "name": "kilo/mvc-framework",
-    "description": "A Laravel-like MVC framework",
+    "description": "A MVC framework",
     "type": "project",
     "license": "MIT",
     "authors": [
         {
-            "name": "Kilo Code",
-            "email": "kilo@example.com"
+            "name": "Arte",
+            "email": ""
         }
     ],
     "autoload": {

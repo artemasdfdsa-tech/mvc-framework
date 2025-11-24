@@ -7,9 +7,7 @@ use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Facades\Facade;
 
-// Create database directory if it doesn't exist
 if (!file_exists(__DIR__ . '/database.sqlite')) {
-    // Create an empty SQLite file
     $dbPath = __DIR__ . '/database.sqlite';
     file_put_contents($dbPath, '');
     
@@ -17,8 +15,6 @@ if (!file_exists(__DIR__ . '/database.sqlite')) {
 } else {
     echo "Database file already exists.\n";
 }
-
-// Initialize the database
 $capsule = new Capsule;
 
 $capsule->addConnection([
@@ -33,20 +29,16 @@ $capsule->addConnection([
     'foreign_key_constraints' => true,
 ]);
 
-// Set the event dispatcher used by Eloquent models
 $container = new Container();
 $capsule->setEventDispatcher(new Dispatcher($container));
 
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
-// Bind the container to the Facade class
 Facade::setFacadeApplication($container);
 
-// Create users table if it doesn't exist
 use Illuminate\Database\Schema\Blueprint;
 
-// Check if users table exists by attempting to query it
 try {
     $exists = $capsule->schema()->hasTable('users');
 } catch (\Exception $e) {

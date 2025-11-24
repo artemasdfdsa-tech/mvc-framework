@@ -4,7 +4,6 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Core\View;
 
-// Test if the view system works
 try {
     $output = View::make('users.index', [
         'title' => 'Test Users Page',

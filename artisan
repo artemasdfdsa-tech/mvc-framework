@@ -5,7 +5,6 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Core\Console\Kernel;
 
-// Simple command line interface
 $input = $argv;
 $output = new class() {
     public function writeln($message) {

@@ -20,25 +20,17 @@ class View
         if (self::$factory === null) {
             $container = new Container();
             
-            // Set up the engine resolver
             $resolver = new EngineResolver();
-            
-            // Register the PHP engine
             $resolver->register('php', function () {
                 return new PhpEngine();
             });
-            
-            // Register the Blade engine
             $bladeCompiler = new BladeCompiler(
                 new \Illuminate\Filesystem\Filesystem(),
                 __DIR__ . '/../storage/views'
             );
-            
             $resolver->register('blade', function () use ($bladeCompiler) {
                 return new CompilerEngine($bladeCompiler);
             });
-            
-            // Set up the view finder
             $finder = new class implements ViewFinderInterface {
                 protected $paths = [];
                 protected $hints = [];
@@ -97,7 +89,6 @@ class View
                 }
                 
                 public function flush() {
-                    // For simple implementation, we don't cache, so nothing to flush
                 }
                 
                 public function prependNamespace($namespace, $hints) {
@@ -115,10 +106,7 @@ class View
                 }
             };
             
-            // Create the event dispatcher
             $events = new Dispatcher($container);
-            
-            // Create the view factory
             self::$factory = new Factory($resolver, $finder, $events);
         }
     }

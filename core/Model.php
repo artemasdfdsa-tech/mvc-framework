@@ -12,7 +12,6 @@ class Model extends Eloquent
     {
         parent::__construct($attributes);
         
-        // Set the connection from config
         $this->connection = $_ENV['DB_CONNECTION'] ?? 'sqlite';
     }
 }

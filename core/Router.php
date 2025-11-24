@@ -66,7 +66,6 @@ class Router
         $httpMethod = $_SERVER['REQUEST_METHOD'];
         $uri = $_SERVER['REQUEST_URI'];
 
-        // Strip query string (?foo=bar) and decode URI
         if (false !== $pos = strpos($uri, '?')) {
             $uri = substr($uri, 0, $pos);
         }
@@ -89,13 +88,11 @@ class Router
                 $vars = $routeInfo[2];
                 
                 if (is_string($handler) && strpos($handler, '@') !== false) {
-                    // Controller@method format
                     list($controller, $method) = explode('@', $handler);
                     $controller = "App\\Controllers\\{$controller}";
                     $controllerInstance = $this->container->make($controller);
                     $response = call_user_func_array([$controllerInstance, $method], array_values($vars));
                 } elseif (is_callable($handler)) {
-                    // Closure format
                     $response = call_user_func_array($handler, array_values($vars));
                 }
                 

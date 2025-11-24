@@ -16,9 +16,7 @@ class Kernel
 
     public function registerCommands()
     {
-        // Register default commands
         $this->commands = [
-            // Add command classes here
         ];
     }
 
