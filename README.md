@@ -67,17 +67,6 @@ class User extends Model
 }
 ```
 
-### Views
-Views use the Plates templating engine:
-```php
-<!-- app/views/users/index.php -->
-<?php $this->layout('layout', ['title' => 'Users']) ?>
-
-<?php $this->start('content') ?>
-<h1>Users</h1>
-<?php $this->stop() ?>
-```
-
 ## Directory Structure
 
 ```
