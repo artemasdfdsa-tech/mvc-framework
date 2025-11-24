@@ -11,13 +11,8 @@ class Database
         $capsule = new Capsule;
         
         $capsule->addConnection([
-            'driver' => $_ENV['DB_DRIVER'] ?? 'sqlite',
-            'host' => $_ENV['DB_HOST'] ?? 'localhost',
-            'database' => $_ENV['DB_DATABASE'] ?? __DIR__ . '/../../database/database.sqlite',
-            'username' => $_ENV['DB_USERNAME'] ?? 'root',
-            'password' => $_ENV['DB_PASSWORD'] ?? '',
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            'driver' => 'sqlite',
+            'database' => realpath($_ENV['DB_DATABASE'] ?? dirname(__DIR__, 2) . '/database/database.sqlite') ?: (substr($_ENV['DB_DATABASE'] ?? '', 0, 1) === '/' || substr($_ENV['DB_DATABASE'] ?? '', 1, 1) === ':' ? $_ENV['DB_DATABASE'] : dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . ltrim($_ENV['DB_DATABASE'] ?? '', './')),
             'prefix' => '',
         ]);
 

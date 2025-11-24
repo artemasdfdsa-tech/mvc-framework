@@ -18,4 +18,20 @@ class User extends Model
         'password',
         'remember_token',
     ];
+    
+    /**
+     * Find user by email
+     */
+    public static function findByEmail($email)
+    {
+        return static::where('email', $email)->first();
+    }
+    
+    /**
+     * Verify password
+     */
+    public function verifyPassword($password)
+    {
+        return password_verify($password, $this->password);
+    }
 }

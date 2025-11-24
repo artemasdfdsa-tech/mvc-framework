@@ -15,7 +15,7 @@ class ServeCommand extends Command
     public function handle($arguments = [])
     {
         $host = env('APP_URL', 'localhost');
-        $port = '8000';
+        $port = env("APP_PORT", 8080);
         
         foreach ($arguments as $arg) {
             if (str_starts_with($arg, '--host=')) {

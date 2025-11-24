@@ -18,9 +18,9 @@ if (!file_exists(__DIR__ . '/database.sqlite')) {
 $capsule = new Capsule;
 
 $capsule->addConnection([
-    'driver' => $_ENV['DB_DRIVER'] ?? 'sqlite',
+    'driver' => $_ENV['DB_CONNECTION'] ?? 'sqlite',
     'host' => $_ENV['DB_HOST'] ?? 'localhost',
-    'database' => $_ENV['DB_DATABASE'] ?? __DIR__ . '/database.sqlite',
+    'database' => $_ENV['DB_DATABASE'] ?? dirname(__DIR__, 1) . '/database/database.sqlite',
     'username' => $_ENV['DB_USERNAME'] ?? 'root',
     'password' => $_ENV['DB_PASSWORD'] ?? '',
     'charset' => 'utf8',
@@ -47,7 +47,7 @@ if ($fresh) {
     
     $tables = [];
     try {
-        if ($_ENV['DB_DRIVER'] ?? 'sqlite' === 'sqlite') {
+        if ($_ENV['DB_CONNECTION'] ?? 'sqlite' === 'sqlite') {
             $stmt = $capsule->getConnection()->getPdo()->query("SELECT name FROM sqlite_master WHERE type='table'");
             $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
         } else {

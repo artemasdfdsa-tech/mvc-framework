@@ -1,14 +1,15 @@
-# Dependency directories
+# Dependencies
 vendor/
+composer.lock
 
-# Environment variables
+# Environment
+.env
 .env.local
 .env.*.local
 
-# Database files
-database/database.sqlite
-database/database.sqlite3
-database/*.db
+# Database
+*.sqlite
+*.db
 
 # Logs
 *.log
@@ -16,78 +17,48 @@ logs/
 storage/logs/
 
 # Cache
-*.cache
 cache/
-storage/cache/
-bootstrap/cache/
+*.cache
+*.tmp
 
-# Temporary files
-tmp/
-temp/
+# OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# IDE files
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+
+# Backup files
 *~
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-Thumbs.db:encryptable
-
-# PHP files
-*.php~
-*.php.bak
+*.bak
+*.backup
 
 # Compiled files
 *.o
 *.pyc
-*.pyo
-*.exe
-*.dll
-*.so
-*.dylib
+*.class
+
+# User uploads
+public/uploads/
+public/storage/
+storage/views
+
+# PHP
+.php_cs.cache
+.phpunit.result.cache
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Build outputs
-build/
 dist/
-node_modules/
-
-# IDE and editor files
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
-*.atom/
-*.vs/
-*.iml
-
-# Composer
-composer.phar
-composer.lock
-
-# Testing
-.phpunit.result.cache
-.phpunit.xml
-.phpunit.xml.dist
-
-# Framework specific
-storage/
-public/storage
-public/uploads
-public/files
-
-# Artifacts
-*.zip
-*.tar
-*.gz
-*.rar
+build/
+*.min.js
+*.min.css
