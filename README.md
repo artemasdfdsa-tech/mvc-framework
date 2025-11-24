@@ -1,4 +1,4 @@
-# Laravel-like MVC Framework
+# MVC Framework
 
 This is a lightweight MVC framework inspired by Laravel, built with similar architecture and design patterns.
 
@@ -11,6 +11,7 @@ This is a lightweight MVC framework inspired by Laravel, built with similar arch
 - Plates templating engine
 - Environment configuration with .env support
 - PSR-4 autoloading
+- Console command system for scaffolding and management
 
 ## Installation
 
@@ -21,7 +22,7 @@ This is a lightweight MVC framework inspired by Laravel, built with similar arch
 
 ## Usage
 
-The framework follows Laravel-like conventions:
+The framework follows conventions:
 
 ### Routing
 Routes are defined in `routes/web.php`:
@@ -67,6 +68,46 @@ class User extends Model
 }
 ```
 
+### Console Commands
+The framework includes a console command system accessible via the `artisan` command. Available commands include:
+
+#### List Commands
+```bash
+php artisan list
+```
+
+#### Create Controllers
+```bash
+php artisan make:controller ControllerName
+```
+
+#### Create Models
+```bash
+php artisan make:model ModelName
+```
+
+#### Create Migrations
+```bash
+php artisan make:migration create_table_name
+```
+
+#### Run Migrations
+```bash
+php artisan migrate
+```
+
+#### Create Views
+```bash
+php artisan make:view view.name
+# Creates file at app/views/view/name.php
+```
+
+#### Development Server
+```bash
+php artisan serve
+# Starts development server on http://localhost:8000
+```
+
 ## Directory Structure
 
 ```
@@ -77,6 +118,7 @@ mvc-laravel-like/
 │   └── views/           # View templates
 ├── config/              # Configuration files
 ├── core/                # Core framework classes
+│   └── Console/         # Console command system
 ├── database/            # Database files
 ├── public/              # Public web directory
 ├── routes/              # Route definitions
@@ -84,6 +126,7 @@ mvc-laravel-like/
 ├── vendor/              # Composer dependencies
 ├── .env                 # Environment variables
 ├── composer.json        # Project dependencies
+├── artisan              # Console command entry point
 └── index.php            # Application entry point
 ```
 

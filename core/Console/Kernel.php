@@ -17,24 +17,59 @@ class Kernel
     public function registerCommands()
     {
         $this->commands = [
+            new Commands\ListCommand(),
+            new Commands\ServeCommand(),
+            new Commands\MakeControllerCommand(),
+            new Commands\MakeModelCommand(),
+            new Commands\MigrateCommand(),
+            new Commands\MakeMigrationCommand(),
+            new Commands\MakeViewCommand(),
         ];
+    }
+
+    public function addCommand(Command $command)
+    {
+        $this->commands[] = $command;
+    }
+
+    public function getCommands()
+    {
+        return $this->commands;
     }
 
     public function handle($input, $output)
     {
-        $command = $input[1] ?? null;
+        $commandName = $input[1] ?? null;
         
-        if ($command === 'list') {
+        if ($commandName === 'list' || $commandName === null) {
             $this->listCommands($output);
-        } else {
-            $output->writeln("Command '$command' not found. Use 'php artisan list' to see available commands.");
+            return;
         }
+
+        $command = $this->findCommand($commandName);
+        if ($command) {
+            $arguments = array_slice($input, 2);
+            $command->handle($arguments);
+        } else {
+            $output->writeln("Command '$commandName' not found. Use 'php artisan list' to see available commands.");
+        }
+    }
+
+    protected function findCommand($name)
+    {
+        foreach ($this->commands as $command) {
+            if ($command->getName() === $name) {
+                return $command;
+            }
+        }
+        return null;
     }
 
     protected function listCommands($output)
     {
         $output->writeln("Available commands:");
-        $output->writeln(" list    - Show this help message");
-        $output->writeln(" serve   - Start the development server");
+        foreach ($this->commands as $command) {
+            $output->writeln(sprintf(" %s    - %s", str_pad($command->getName(), 15), $command->getDescription()));
+        }
     }
 }

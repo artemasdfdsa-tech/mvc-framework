@@ -39,8 +39,8 @@ Facade::setFacadeApplication($container);
 
 $migrationsPath = __DIR__ . '/migrations';
 
-$fresh = in_array('--fresh', $argv);
-$rollback = in_array('--rollback', $argv);
+$fresh = in_array('--fresh', $argv ?? []);
+$rollback = in_array('--rollback', $argv ?? []);
 
 if ($fresh) {
     echo "Dropping all tables...\n";

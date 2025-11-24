@@ -1,0 +1,93 @@
+# Dependency directories
+vendor/
+
+# Environment variables
+.env.local
+.env.*.local
+
+# Database files
+database/database.sqlite
+database/database.sqlite3
+database/*.db
+
+# Logs
+*.log
+logs/
+storage/logs/
+
+# Cache
+*.cache
+cache/
+storage/cache/
+bootstrap/cache/
+
+# Temporary files
+tmp/
+temp/
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Thumbs.db:encryptable
+
+# PHP files
+*.php~
+*.php.bak
+
+# Compiled files
+*.o
+*.pyc
+*.pyo
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build outputs
+build/
+dist/
+node_modules/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.atom/
+*.vs/
+*.iml
+
+# Composer
+composer.phar
+composer.lock
+
+# Testing
+.phpunit.result.cache
+.phpunit.xml
+.phpunit.xml.dist
+
+# Framework specific
+storage/
+public/storage
+public/uploads
+public/files
+
+# Artifacts
+*.zip
+*.tar
+*.gz
+*.rar
