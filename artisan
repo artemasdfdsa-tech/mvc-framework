@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use Core\Console\Kernel;
+
+// Simple command line interface
+$input = $argv;
+$output = new class() {
+    public function writeln($message) {
+        echo $message . PHP_EOL;
+    }
+};
+
+$container = new Illuminate\Container\Container();
+$kernel = new Kernel($container);
+$kernel->registerCommands();
+$kernel->handle($input, $output);
