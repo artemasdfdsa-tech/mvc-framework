@@ -1,12 +1,12 @@
 {
-    "name": "kilo/mvc-framework",
+    "name": "mvc/mvc-framework",
     "description": "A MVC framework",
     "type": "project",
     "license": "MIT",
     "authors": [
         {
             "name": "Arte",
-            "email": ""
+            "email": "asdarte0@gmail.com"
         }
     ],
     "autoload": {
